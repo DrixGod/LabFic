@@ -178,7 +178,7 @@ void trackFilteredObject(int &x, int &y, Mat threshold, Mat &cameraFeed) {
 int main(int argc, char* argv[])
 {
 
-	//some boolean variables for different functionality within this
+	/*//some boolean variables for different functionality within this
 	//program
 	bool trackObjects = true;
 	bool useMorphOps = true;
@@ -202,12 +202,13 @@ int main(int argc, char* argv[])
 	capture.set(CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH);
 	capture.set(CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT);
 	//start an infinite loop where webcam feed is copied to cameraFeed matrix
-	//all of our operations will be performed within this loop
+	//all of our operations will be performed within this loop*/
 
-
+  
+  system("./socket 193.226.12.217 20232");
 
 	
-	while (1) {
+/*	while (1) {
 
 
 		//store image to matrix
@@ -235,8 +236,7 @@ int main(int argc, char* argv[])
 		//delay 30ms so that screen can refresh.
 		//image will not appear without this waitKey() command
 		waitKey(30);
-	}
+	}*/
 
 	return 0;
 }
-
