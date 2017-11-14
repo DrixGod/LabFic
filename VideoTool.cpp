@@ -178,7 +178,7 @@ void trackFilteredObject(int &x, int &y, Mat threshold, Mat &cameraFeed) {
 int main(int argc, char* argv[])
 {
 
-	/*//some boolean variables for different functionality within this
+	//some boolean variables for different functionality within this
 	//program
 	bool trackObjects = true;
 	bool useMorphOps = true;
@@ -188,10 +188,18 @@ int main(int argc, char* argv[])
 	Mat cameraFeed;
 	//matrix storage for HSV image
 	Mat HSV;
+
 	//matrix storage for binary threshold image
 	Mat threshold;
+   Mat threshold2;
+
+
+
+
+
 	//x and y values for the location of the object
 	int x = 0, y = 0;
+  int x2 = 0, y2 = 0;
 	//create slider bars for HSV filtering
 	createTrackbars();
 	//video capture object to acquire webcam feed
@@ -202,41 +210,58 @@ int main(int argc, char* argv[])
 	capture.set(CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH);
 	capture.set(CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT);
 	//start an infinite loop where webcam feed is copied to cameraFeed matrix
-	//all of our operations will be performed within this loop*/
+	//all of our operations will be performed within this loop
 
   
-  system("./socket 193.226.12.217 20232");
+  //system("./socket 193.226.12.217 20232");
 
 	
-/*	while (1) {
+  	while (1) {
 
 
 		//store image to matrix
-		capture.read(cameraFeed);
+    capture.read(cameraFeed);
 		//convert frame from BGR to HSV colorspace
 		cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
 		//filter HSV image between values and store filtered image to
 		//threshold matrix
 		inRange(HSV, Scalar(H_MIN, S_MIN, V_MIN), Scalar(H_MAX, S_MAX, V_MAX), threshold);
+  
+    int H_MIN = 144;
+    int H_MAX = 188;
+    int S_MIN = 65;
+    int S_MAX = 120;
+    int V_MIN = 89;
+    int V_MAX = 256;
+  
+    inRange(HSV, Scalar(H_MIN, S_MIN, V_MIN), Scalar(H_MAX, S_MAX, V_MAX), threshold2);
 		//perform morphological operations on thresholded image to eliminate noise
 		//and emphasize the filtered object(s)
 		if (useMorphOps)
+   {
 			morphOps(threshold);
+      morphOps(threshold2);
+    }  
 		//pass in thresholded frame to our object tracking function
 		//this function will return the x and y coordinates of the
 		//filtered object
 		if (trackObjects)
+   {
 			trackFilteredObject(x, y, threshold, cameraFeed);
-      
+      trackFilteredObject(x, y, threshold2, cameraFeed);
+   }
+
+
+
 		//show frames
-		imshow(windowName2, threshold);
+		imshow(windowName2, threshold);	
 		imshow(windowName, cameraFeed);
 		//imshow(windowName1, HSV);
 		setMouseCallback("Original Image", on_mouse, &p);
 		//delay 30ms so that screen can refresh.
 		//image will not appear without this waitKey() command
 		waitKey(30);
-	}*/
+	}
 
 	return 0;
 }
