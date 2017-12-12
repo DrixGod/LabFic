@@ -213,7 +213,7 @@ int main(int argc, char* argv[])
 	//all of our operations will be performed within this loop
 
   
-  //system("./socket 193.226.12.217 20232");
+  system("./socket 193.226.12.217 20232");
 
 	
   	while (1) {
